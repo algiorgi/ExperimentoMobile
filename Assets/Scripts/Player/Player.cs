@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using experimentomobile.utils;
 
 namespace experimentomobile.player
 {
@@ -35,7 +34,7 @@ namespace experimentomobile.player
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Base"))
+            if (collision.gameObject.CompareTag(Tags.BASE))
             {
                 isOnGround = true;
             }
