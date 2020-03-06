@@ -12,12 +12,28 @@ namespace experimentomobile.player
         private float jumpForce = 200f;
         [SerializeField]
         private bool isOnGround;
+        [SerializeField]
+        private bool isCrouched;
 
         private void Start()
         {
             playerRigidbody = GetComponent<Rigidbody>();
             playerAnimator = GetComponent<Animator>();
             isOnGround = true;
+        }
+
+        private void Update()
+        {
+            if (!isCrouched && Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                Crouch();
+            }
+            if (isCrouched && Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                Stand();
+            }
+
+            playerAnimator.SetBool("Crouched_b", isCrouched);
         }
 
         private void FixedUpdate()
@@ -35,9 +51,20 @@ namespace experimentomobile.player
         }
 
         private void Jump()
-        {
-            
+        {            
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);            
+        }
+
+        private void Crouch()
+        {
+            isCrouched = true;
+            playerAnimator.SetTrigger("StandingToCrouched_trig");
+        }
+
+        private void Stand()
+        {            
+            playerAnimator.SetTrigger("CrouchedToStanding_trig");
+            isCrouched = false;
         }
 
         private void OnCollisionEnter(Collision collision)
