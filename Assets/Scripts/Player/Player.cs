@@ -24,11 +24,11 @@ namespace experimentomobile.player
 
         private void Update()
         {
-            if (!isCrouched && Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 Crouch();
             }
-            if (isCrouched && Input.GetKeyUp(KeyCode.LeftControl))
+            if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 Stand();
             }
@@ -38,16 +38,19 @@ namespace experimentomobile.player
 
         private void FixedUpdate()
         {            
-            if (isOnGround && Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 PrepareJump();                
             }
         }
 
-        private void PrepareJump()
+        public void PrepareJump()
         {
-            isOnGround = false;
-            playerAnimator.SetTrigger("Jump_trig");
+            if (isOnGround && !isCrouched)
+            {
+                isOnGround = false;
+                playerAnimator.SetTrigger("Jump_trig");
+            }            
         }
 
         private void Jump()
@@ -55,16 +58,22 @@ namespace experimentomobile.player
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);            
         }
 
-        private void Crouch()
+        public void Crouch()
         {
-            isCrouched = true;
-            playerAnimator.SetTrigger("StandingToCrouched_trig");
+            if (isOnGround && !isCrouched)
+            {
+                isCrouched = true;
+                playerAnimator.SetTrigger("StandingToCrouched_trig");
+            }            
         }
 
-        private void Stand()
-        {            
-            playerAnimator.SetTrigger("CrouchedToStanding_trig");
-            isCrouched = false;
+        public void Stand()
+        {
+            if (isCrouched)
+            {
+                playerAnimator.SetTrigger("CrouchedToStanding_trig");
+                isCrouched = false;
+            }            
         }
 
         private void OnCollisionEnter(Collision collision)
