@@ -46,12 +46,15 @@ namespace experimentomobile.player.controller
         }
 
         private void HandleTouchEnded()
-        {            
+        {
             if (lastTouch.position.y > firstTouch.position.y)
             {
-                Debug.Log("DEBE SALTAR");
                 player.PrepareJump();
-            }            
+            }
+            else if (lastTouch.position.y < firstTouch.position.y)
+            {
+                player.Crouch();
+            }
         }
 
         private Vector3 GetTouchOnWorldPoint(Vector2 touchPosition)
