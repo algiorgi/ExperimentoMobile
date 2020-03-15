@@ -53,9 +53,14 @@ namespace experimentomobile.player
             }            
         }
 
-        private void Jump()
-        {            
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);            
+        public void Jump()
+        {
+            if (isOnGround && !isCrouched)
+            {
+                isOnGround = false;
+                playerAnimator.SetTrigger("Jump_trig");
+                playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }            
         }
 
         public void Crouch()

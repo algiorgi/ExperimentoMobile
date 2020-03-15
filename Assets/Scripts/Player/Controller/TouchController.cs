@@ -49,7 +49,7 @@ namespace experimentomobile.player.controller
         {
             if (lastTouch.position.y > firstTouch.position.y)
             {
-                player.PrepareJump();
+                player.Jump();
             }
             else if (lastTouch.position.y < firstTouch.position.y)
             {
