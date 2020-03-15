@@ -15,6 +15,12 @@ namespace experimentomobile.player.controller
         [SerializeField]
         private float trailPositionOnZ = 5f;
 
+        [SerializeField]
+        private Player player;
+
+        private Touch firstTouch;
+        private Touch lastTouch;
+
         // Update is called once per frame
         void Update()
         {
@@ -23,7 +29,8 @@ namespace experimentomobile.player.controller
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began)
                 {
-                    StartToTrailTouchPosition(GetTouchOnWorldPoint(touch.position));                    
+                    firstTouch = touch;
+                    StartToTrailTouchPosition(GetTouchOnWorldPoint(touch.position));
                 }
                 else if (touch.phase == TouchPhase.Moved)
                 {                    
@@ -31,9 +38,20 @@ namespace experimentomobile.player.controller
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    StopToTrailTouchPosition();                    
+                    lastTouch = touch;
+                    StopToTrailTouchPosition();
+                    HandleTouchEnded();
                 }
             }
+        }
+
+        private void HandleTouchEnded()
+        {            
+            if (lastTouch.position.y > firstTouch.position.y)
+            {
+                Debug.Log("DEBE SALTAR");
+                player.PrepareJump();
+            }            
         }
 
         private Vector3 GetTouchOnWorldPoint(Vector2 touchPosition)
@@ -42,7 +60,7 @@ namespace experimentomobile.player.controller
         }
 
         private void StartToTrailTouchPosition(Vector3 startPosition)
-        {
+        {            
             if (showTrail)
             {
                 trailParticle.Play();
