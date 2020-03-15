@@ -273,6 +273,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548981926 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7742647505356099707, guid: 61ca2af267e5e66449d98aa098d5a0c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 170835625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0a91dbfb5ac0b4a9137f13dfad3194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1016158618
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +299,7 @@ GameObject:
   - component: {fileID: 1016158619}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,6 +578,7 @@ MonoBehaviour:
   trailParticle: {fileID: 1925743478}
   showTrail: 0
   trailPositionOnZ: 4
+  player: {fileID: 548981926}
 --- !u!4 &1972650720
 Transform:
   m_ObjectHideFlags: 0
