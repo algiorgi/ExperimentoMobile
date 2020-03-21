@@ -40,7 +40,7 @@ namespace experimentomobile.player
         {            
             if (Input.GetKey(KeyCode.Space))
             {
-                PrepareJump();                
+                Jump();                
             }
         }
 
